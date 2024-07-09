@@ -2,6 +2,11 @@ package cigar;
 
 import java.util.List;
 
+import cart.CartItem;
+import cart.CartService;
+import cart.CigarCartService;
+import cart.OracleCartDAO;
+
 public class OracleCigarService implements CigarService {
 	private CigarDAO cigarDao;
 	
@@ -20,20 +25,26 @@ public class OracleCigarService implements CigarService {
 
 	@Override
 	public boolean remove(int cagarId) {
+		if(cigarDao.selectCigar(cagarId) == null) return false;
 		
-		return cigarDao.deletCigar(cagarId) == 1 ? true:false ;
+		CartService cartService = new CigarCartService(new OracleCartDAO());
+		List<CartItem> itemList = cartService.readByCigarId(cagarId);
+		System.out.println(itemList.size());
+		if(itemList.size() > 0) {
+			 cartService.removeByCigarId(cagarId);
+		}
+		
+		return cigarDao.deleteCigar(cagarId) == 1 ? true:false ;
 	}
 
 	@Override
 	public List<Cigar> listAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return cigarDao.selectCigarAll();
 	}
 
 	@Override
 	public Cigar read(int cigarId) {
-		// TODO Auto-generated method stub
-		return null;
+		return cigarDao.selectCigar(cigarId);
 	}
 
 }

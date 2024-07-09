@@ -8,5 +8,5 @@ public interface CigarDAO {
 	public List<Cigar> selectCigarAll();
 	public int insertCigar(Cigar cigar);
 	public int updateCigar(Cigar cigar);
-	public int deletCigar(int cigarId);
+	public int deleteCigar(int cigarId);
 }

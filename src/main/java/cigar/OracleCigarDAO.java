@@ -117,7 +117,7 @@ public class OracleCigarDAO implements CigarDAO {
 	}
 
 	@Override
-	public int deletCigar(int cigarId) {
+	public int deleteCigar(int cigarId) {
 		
 		int result = 0;
 		JDBConnection jdbc = new JDBConnection();

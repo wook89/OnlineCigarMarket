@@ -3,17 +3,30 @@ import cigar.Cigar;
 
 public class CartItem {
     
-    Cigar cigar;
-    int cigarId;
-    int quantity;
+    private Cigar cigar;
+    private int cartId;
+    private int cigarId;
+    private int quantity;
+    private int memberNo;
     
-    public CartItem(Cigar cigar) {
+    public int getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
+
+	public CartItem(Cigar cigar) {
         this.cigar = cigar;
         this.cigarId = cigar.getCigarId();
         this.quantity = 1;
     }
     
-    public Cigar getCigar() {
+    public CartItem(int cartId, int memberNo , int cigarId, int quantity) {
+	}
+
+	public Cigar getCigar() {
         return cigar;
     }
 
