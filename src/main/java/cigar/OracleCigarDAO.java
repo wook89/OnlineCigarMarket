@@ -66,17 +66,74 @@ public class OracleCigarDAO implements CigarDAO {
 
 	@Override
 	public int insertCigar(Cigar cigar) {
-		return 0;
+		JDBConnection jdbc = new JDBConnection();
+		// create SQL
+		String sql = new StringBuilder()
+				.append("insert into cigar(id,name,tar,nico,price)")
+				.append("values(cigar_num_seq.nextval, ? , ? , ? , ? )").toString();
+		int result = 0;
+		
+		try {
+			jdbc.pstmt = jdbc.con.prepareStatement(sql);
+			jdbc.pstmt.setString(1, cigar.getName());
+			jdbc.pstmt.setString(2, cigar.getTar());
+			jdbc.pstmt.setString(3, cigar.getNicotine());
+			jdbc.pstmt.setInt(4, cigar.getPrice());
+			result = jdbc.pstmt.executeUpdate();
+			if(result==1) {
+				System.out.println("상품추가 완료");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			jdbc.close();
+		}
+		return result;
 	}
 
 	@Override
 	public int updateCigar(Cigar cigar) {
-		return 0;
+		JDBConnection jdbc = new JDBConnection();
+		int result = 0;
+		String sql = new StringBuilder()
+				.append("update cigar ")
+				.append("set name = ?, tar = ? , nico = ? , price = ? ")
+				.append("where id=?").toString();
+		try {
+			jdbc.pstmt = jdbc.con.prepareStatement(sql);
+			jdbc.pstmt.setString(1, cigar.getName());
+			jdbc.pstmt.setString(2, cigar.getTar());
+			jdbc.pstmt.setString(3, cigar.getNicotine());
+			jdbc.pstmt.setInt(4, cigar.getPrice());
+
+			result = jdbc.pstmt.executeUpdate();
+			System.out.println(result + "행이 수정 되었습니다.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			jdbc.close();
+		}
+		return result;
 	}
 
 	@Override
-	public int deletCigar(Cigar cigar) {
-		return 0;
-	}
+	public int deletCigar(int cigarId) {
+		
+		int result = 0;
+		JDBConnection jdbc = new JDBConnection();
+		String sql = "delete book where id = ? ";
 
+		try {
+			jdbc.pstmt = jdbc.con.prepareStatement(sql);
+			jdbc.pstmt.setInt(1, cigarId);
+			result = jdbc.pstmt.executeUpdate();
+
+			System.out.println(result + "행이 삭제되었습니다.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			jdbc.close();
+		}
+		return result;
+	}
 }
