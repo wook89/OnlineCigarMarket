@@ -13,7 +13,7 @@ public class OracleCigarDAO implements CigarDAO {
 		Cigar cigar = null;
 		JDBConnection jdbc = new JDBConnection();
 		String sql = new StringBuilder()
-				.append("")
+				.append("select * from cigar where id = ? ")
 				.toString();
 		try {
 			jdbc.pstmt = jdbc.con.prepareStatement(sql);
@@ -98,13 +98,14 @@ public class OracleCigarDAO implements CigarDAO {
 		String sql = new StringBuilder()
 				.append("update cigar ")
 				.append("set name = ?, tar = ? , nico = ? , price = ? ")
-				.append("where id=?").toString();
+				.append("where id= ? ").toString();
 		try {
 			jdbc.pstmt = jdbc.con.prepareStatement(sql);
 			jdbc.pstmt.setString(1, cigar.getName());
 			jdbc.pstmt.setString(2, cigar.getTar());
 			jdbc.pstmt.setString(3, cigar.getNicotine());
 			jdbc.pstmt.setInt(4, cigar.getPrice());
+			jdbc.pstmt.setInt(5, cigar.getCigarId());
 
 			result = jdbc.pstmt.executeUpdate();
 			System.out.println(result + "행이 수정 되었습니다.");
@@ -121,7 +122,7 @@ public class OracleCigarDAO implements CigarDAO {
 		
 		int result = 0;
 		JDBConnection jdbc = new JDBConnection();
-		String sql = "delete book where id = ? ";
+		String sql = "delete cigar where id = ? ";
 
 		try {
 			jdbc.pstmt = jdbc.con.prepareStatement(sql);

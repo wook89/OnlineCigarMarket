@@ -24,17 +24,17 @@ public class OracleCigarService implements CigarService {
 	}
 
 	@Override
-	public boolean remove(int cagarId) {
-		if(cigarDao.selectCigar(cagarId) == null) return false;
+	public boolean remove(int cigarId) {
+		if(cigarDao.selectCigar(cigarId) == null) return false;
 		
 		CartService cartService = new CigarCartService(new OracleCartDAO());
-		List<CartItem> itemList = cartService.readByCigarId(cagarId);
-		System.out.println(itemList.size());
+		List<CartItem> itemList = cartService.readByCigarId(cigarId);
+		System.out.println("이 상품을 장바구니에 등록해놓은 유저들의 상품 "+itemList.size()+"항목 삭제");
 		if(itemList.size() > 0) {
-			 cartService.removeByCigarId(cagarId);
+			 cartService.removeByCigarId(cigarId);
 		}
 		
-		return cigarDao.deleteCigar(cagarId) == 1 ? true:false ;
+		return cigarDao.deleteCigar(cigarId) == 1 ? true:false ;
 	}
 
 	@Override

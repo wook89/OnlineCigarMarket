@@ -26,7 +26,7 @@ public class CigarCartService implements CartService {
 	}
 	@Override
 	public List<CartItem> readByCigarId(int cigarId) {
-		List<CartItem> itemList = new ArrayList<>();
+		//List<CartItem> itemList = new ArrayList<>();
 		return cartDao.selectByCigarId(cigarId);
 	}
 	@Override

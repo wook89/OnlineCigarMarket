@@ -11,7 +11,7 @@ import = "cigar.*"
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Online Cigarette Market</title>
+<title>상품관리 메인 페이지</title>
 <style>
 	table{
 		border-collapse : collapse;
@@ -23,9 +23,9 @@ import = "cigar.*"
 </style>
 </head>
 <body>
-<%@ include file = "common/header.jsp" %> 
+<%@ include file = "../common/header.jsp" %> 
 <h3>상품목록</h3>
-	
+	<a href="registPage.jsp"><button>상품등록</button></a><br>
 	<br>
 	<%if(cigarList.size() == 0){ %>
 		<p>등록되어있는 상품이 없습니다.</p>	
@@ -35,7 +35,7 @@ import = "cigar.*"
 			<% for(Cigar cigar : cigarList) { %>
 				<tr>
 					<td><%= cigar.getCigarId() %></td>
-					<td><a href="<%= request.getContextPath() %>/cigar/detailPage.jsp?id=<%=cigar.getCigarId()%>"><%= cigar.getName() %></a></td>
+					<td><a href="detailPage.jsp?id=<%=cigar.getCigarId()%>"><%= cigar.getName() %></a></td>
 					<td><%= cigar.getTar()%></td>
 					<td><%= cigar.getNicotine()%></td>
 					<td><%= String.format("%,d",cigar.getPrice())%>원</td>
@@ -43,6 +43,6 @@ import = "cigar.*"
 			<%} %>
 		</table>
 		<%} %>
-<%@ include file = "common/footer.jsp" %> 		
+<%@ include file = "../common/footer.jsp" %> 		
 </body>
 </html>

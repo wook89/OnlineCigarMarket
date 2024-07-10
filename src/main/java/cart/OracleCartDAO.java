@@ -13,8 +13,8 @@ public class OracleCartDAO implements CartDAO {
 		int result =0;
 		JDBConnection jdbc = new JDBConnection();
 		
-		String sql =new StringBuilder("insert into cart (id, member_no, cigar_id, quantity ) ")
-							  .append("values(cart_seq.nextval, ?,?,? )")
+		String sql =new StringBuilder("insert into cigar_cart (id, member_no, cigar_id, quantity, regdate ) ")
+							  .append("values(cart_seq.nextval, ?,?,?,sysdate )")
 							  .toString();
 		
 		try {
@@ -36,7 +36,7 @@ public class OracleCartDAO implements CartDAO {
 		CartItem item = null;
 		JDBConnection jdbc = new JDBConnection();
 		
-		String sql = "select * from cart where id = ? and member_no = ?";
+		String sql = "select * from cigar_cart where id = ? and member_no = ?";
 		try {
 			jdbc.pstmt = jdbc.con.prepareStatement(sql);
 			jdbc.pstmt.setInt(1, cartId);
@@ -61,7 +61,7 @@ public class OracleCartDAO implements CartDAO {
 		CartItem item = null;
 		JDBConnection jdbc = new JDBConnection();
 		
-		String sql = "select * from cart where member_no = ? and cigar_id = ? ";
+		String sql = "select * from cigar_cart where member_no = ? and cigar_id = ? ";
 		try {
 			jdbc.pstmt = jdbc.con.prepareStatement(sql);
 			jdbc.pstmt.setInt(1, memberNo);
@@ -87,7 +87,7 @@ public class OracleCartDAO implements CartDAO {
 		List<CartItem> itemList = new ArrayList<>();
 		JDBConnection jdbc = new JDBConnection();
 		
-		String sql = "select * from cart where cigar_id = ? ";
+		String sql = "select * from cigar_cart where cigar_id = ? ";
 		try {
 			jdbc.pstmt = jdbc.con.prepareStatement(sql);
 			jdbc.pstmt.setInt(1, cigarId);
@@ -113,7 +113,7 @@ public class OracleCartDAO implements CartDAO {
 		List<CartItem> itemList = new ArrayList<>();
 		JDBConnection jdbc = new JDBConnection();
 		
-		String sql = "select * from cart where member_no = ?";
+		String sql = "select * from cigar_cart where member_no = ?";
 		try {
 			jdbc.pstmt = jdbc.con.prepareStatement(sql);
 			jdbc.pstmt.setInt(1, memberNo);
@@ -141,7 +141,7 @@ public class OracleCartDAO implements CartDAO {
 		
 		JDBConnection jdbc = new JDBConnection();
 		String sql = new StringBuilder()
-								.append("update cart ")
+								.append("update cigar_cart ")
 								.append("set quantity = ? ")
 								.append("where id = ? and member_no = ? ")
 								.toString();
@@ -163,7 +163,7 @@ public class OracleCartDAO implements CartDAO {
 		int result = 0;
 		
 		JDBConnection jdbc = new JDBConnection();
-		String sql = "delete cart where member_no = ? and id = ?";
+		String sql = "delete cigar_cart where member_no = ? and id = ?";
 		
 		
 		try {
@@ -183,7 +183,7 @@ public class OracleCartDAO implements CartDAO {
 			int result = 0;
 		
 		JDBConnection jdbc = new JDBConnection();
-		String sql = "delete cart where member_no = ?";
+		String sql = "delete cigar_cart where member_no = ?";
 		
 		try {
 			jdbc.pstmt = jdbc.con.prepareStatement(sql);
@@ -201,7 +201,7 @@ public class OracleCartDAO implements CartDAO {
 	int result = 0;
 		
 		JDBConnection jdbc = new JDBConnection();
-		String sql = "delete cart where cigar_id = ?";
+		String sql = "delete cigar_cart where cigar_id = ?";
 		
 		try {
 			jdbc.pstmt = jdbc.con.prepareStatement(sql);

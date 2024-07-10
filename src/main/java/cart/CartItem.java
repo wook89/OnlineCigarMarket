@@ -22,8 +22,16 @@ public class CartItem {
         this.cigarId = cigar.getCigarId();
         this.quantity = 1;
     }
-    
+	public CartItem(int memberNo,int cigarId,int quantity) {
+		this.memberNo = memberNo;
+		this.cigarId = cigarId;
+		this.quantity = quantity;
+	}
     public CartItem(int cartId, int memberNo , int cigarId, int quantity) {
+    	this.cartId = cartId;
+    	this.memberNo = memberNo;
+    	this.cigarId = cigarId;
+    	this.quantity = quantity;
 	}
 
 	public Cigar getCigar() {
@@ -62,4 +70,12 @@ public class CartItem {
     public String toString() {
         return cigar.getCigarId() + " <" + cigar.getName() + "> [" + quantity + "媛�] " + getPrice() + "�썝";
     }
+
+	public int getCartId() {
+		return cartId;
+	}
+
+	public void setCartId(int cartId) {
+		this.cartId = cartId;
+	}
 }

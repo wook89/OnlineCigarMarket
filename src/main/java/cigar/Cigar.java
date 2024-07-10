@@ -14,6 +14,12 @@ public class Cigar {
 		this.nicotine = nicotine;
 		this.price = price;	
 	}
+	public Cigar(String name,String tar,String nicotine,int price) {
+		this.name = name;
+		this.tar = tar;
+		this.nicotine = nicotine;
+		this.price = price;	
+	}
 	
 	public int getCigarId() {
 		return cigarId;
